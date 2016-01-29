@@ -72,34 +72,34 @@ def obten_token():
 			if edo < 100 and edo != 0: lexema += _c
 		if edo == INT:	
 			_leer = False # ya se leyó el siguiente caracter
-			print "Entero", lexema
+			#print "Entero", lexema
 			return INT
 		elif edo == FLT:
 			_leer = False # ya se leyó el siguiente caracter
-			print "Flotante", lexema
+			#print "Flotante", lexema
 			return FLT
 		elif edo == OPB:
 			lexema += _c # el último caracter forma el lexema
-			print "Operador", lexema
+			#print "Operador", lexema
 			return OPB
 		elif edo == LRP:
 			lexema += _c # el último caracter forma el lexema
-			print "Delimitador", lexema
+			#print "Delimitador", lexema
 			return LRP
 		elif edo == RRP:
 			lexema += _c # el último caracter forma el lexema
-			print "Delimitador", lexema
+			#print "Delimitador", lexema
 			return RRP
 		elif edo == 108:
 			lexema += _c # el último caracter forma el lexema
-			print "id", lexema
+			#print "id", lexema
 			return 108
 		elif edo == END:
-			print "Fin de expresion"
+			#print "Fin de expresion"
 			return END
 		else:
 			leer = False # el último caracter no es raro
-			print "ERROR! palabra ilegal", lexema
+			#print "ERROR! palabra ilegal", lexema
 			return ERR
 			
 		

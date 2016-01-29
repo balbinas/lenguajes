@@ -1,39 +1,40 @@
 # -*- coding: utf-8 -*-
 
-# Implementación de un scanner mediante la codificación de un Autómata
-# Finito Determinista como una Matríz de Transiciones
+# Implementaci—n de un scanner mediante la codificaci—n de un Aut—mata
+# Finito Determinista como una Matr’z de Transiciones
 # Autor: Dr. Santiago Conant, Agosto 2014 (modificado en Agosto 2015)
 
 import sys
 
 # tokens
-INT = 100 # Número entero
-FLT = 101 # Número de punto flotante
+INT = 100 # Nœmero entero
+FLT = 101 # Nœmero de punto flotante
 OPB = 102 # Operador binario
-LRP = 103 # Delimitador: paréntesis izquierdo
-RRP = 104 # Delimitador: paréntesis derecho
+LRP = 103 # Delimitador: parŽntesis izquierdo
+RRP = 104 # Delimitador: parŽntesis derecho
 END = 105 # Fin de la entrada
-ERR = 200 # Error léxico: palabra desconocida
+ERR = 200 # Error lŽxico: palabra desconocida
+VAR = 108 # Variable/Vocal
 
-# Matriz de transiciones: codificación del AFD
-# [renglón, columna] = [estado no final, transición]
+# Matriz de transiciones: codificaci—n del AFD
+# [rengl—n, columna] = [estado no final, transici—n]
 # Estados > 99 son finales (ACEPTORES)
 # Caso especial: Estado 200 = ERROR
 #	   dig   op   (    )  raro  esp  .   $  vocal  ,
 MT = [[  1, OPB, LRP, RRP,   4,   0, 4, END,   5, 300], # edo 0 - estado inicial
-	  [  1, INT, INT, INT, INT, INT, 2, INT,   4, INT], # edo 1 - dígitos enteros
+	  [  1, INT, INT, INT, INT, INT, 2, INT,   4, INT], # edo 1 - d’gitos enteros
 	  [  3, ERR, ERR, ERR,   4, ERR, 4, ERR,   4, ERR], # edo 2 - primer decimal flotante
 	  [  3, FLT, FLT, FLT, FLT, FLT, 4, FLT,   4, FLT], # edo 3 - decimales restantes flotante
 	  [ERR, ERR, ERR, ERR,   4, ERR, 4, ERR,   4, ERR], # edo 4 - estado de error
-	  [  5, 108, 108, 108,   4, 108, 4, ERR,   5, 108]] # edo 5 - vocal
+	  [  5, VAR, VAR, VAR,   4, VAR, 4, VAR,   5, VAR]] # edo 5 - vocal
 
-# Filtro de caracteres: regresa el número de columna de la matriz de transiciones
+# Filtro de caracteres: regresa el nœmero de columna de la matriz de transiciones
 # de acuerdo al caracter dado
 def filtro(c):
-	"""Regresa el número de columna asociado al tipo de caracter dado(c)"""
+	"""Regresa el nœmero de columna asociado al tipo de caracter dado(c)"""
 	if c == '0' or c == '1' or c == '2' or \
 	   c == '3' or c == '4' or c == '5' or \
-	   c == '6' or c == '7' or c == '8' or c == '9': # dígitos
+	   c == '6' or c == '7' or c == '8' or c == '9': # d’gitos
 		return 0
 	elif c == '+' or c == '-' or c == '*' or \
 		 c == '/': # operadores
@@ -55,13 +56,13 @@ def filtro(c):
 	else: # caracter raro
 		return 4
 
-# Función principal: implementa el análisis léxico
+# Funci—n principal: implementa el an‡lisis lŽxico
 def scanner():
-	"""Implementa un analizador léxico: lee los caracteres de la entrada estándar"""
-	edo = 0 # número de estado en el autómata
+	"""Implementa un analizador lŽxico: lee los caracteres de la entrada est‡ndar"""
+	edo = 0 # nœmero de estado en el aut—mata
 	lexema = "" # palabra que genera el token
 	tokens = []
-	leer = True # indica si se requiere leer un caracter de la entrada estándar
+	leer = True # indica si se requiere leer un caracter de la entrada est‡ndar
 	while (True):
 		while edo < 100:	# mientras el estado no sea ACEPTOR ni ERROR
 			if leer: c = sys.stdin.read(1)
@@ -69,29 +70,30 @@ def scanner():
 			edo = MT[edo][filtro(c)]
 			if edo < 100 and edo != 0: lexema += c
 		if edo == INT:	
-			leer = False # ya se leyó el siguiente caracter
-			print "Entero", lexema
+			leer = False # ya se ley— el siguiente caracter
+			#print "Entero", lexema
 		elif edo == FLT:
-			leer = False # ya se leyó el siguiente caracter
-			print "Flotante", lexema
+			leer = False # ya se ley— el siguiente caracter
+			#print "Flotante", lexema
 		elif edo == OPB:
-			lexema += c # el último caracter forma el lexema
-			print "Operador", lexema
+			lexema += c # el œltimo caracter forma el lexema
+			#print "Operador", lexema
 		elif edo == LRP:
-			lexema += c # el último caracter forma el lexema
-			print "Delimitador", lexema
+			lexema += c # el œltimo caracter forma el lexema
+			#print "Delimitador", lexema
 		elif edo == RRP:
-			lexema += c # el último caracter forma el lexema
-			print "Delimitador", lexema
-		elif edo == 108:
-			lexema += c # el último caracter forma el lexema
-			print "id", lexema
+			lexema += c # el œltimo caracter forma el lexema
+			#print "Delimitador", lexema
+		elif edo == VAR:
+			leer = False
+#			lexema += c # el œltimo caracter forma el lexema
+			#print "id", lexema
 		elif edo == 300:
 			lexema += c
-			print "Delimitador", lexema
+			#print "Delimitador", lexema
 		elif edo == ERR:
-			leer = False # el último caracter no es raro
-			print "ERROR! palabra ilegal", lexema
+			leer = False # el œltimo caracter no es raro
+			#print "ERROR! palabra ilegal", lexema
 		tokens.append(edo)
 		if edo == END: return tokens
 		lexema = ""
