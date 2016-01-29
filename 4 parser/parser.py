@@ -52,6 +52,11 @@ def exp1():
 	if token[0] == 300:
 		match(token[0])
 		exp()
+	elif token[0] == scanner.LRP:
+		match(token[0]) # reconoce Delimitador (
+		exp()
+		match(scanner.RRP)
+		exp1()
 	elif token[0] == scanner.OPB:
 		match(token[0]) # reconoce operador
 		exp()
