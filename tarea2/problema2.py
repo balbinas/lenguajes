@@ -2,8 +2,8 @@
 # Tarea 2 - Problema 2 - Implementacion en Python
 # 9 de Febrero 2016
 # Balbina Santana   A00812215
-# Fabian Montemayor A0
-# Manuel Sanudo A0
+# Fabian Montemayor A001280156
+# Manuel Sanudo     A001192241
 
 import sys
 
@@ -12,42 +12,38 @@ import sys
 # Estados > 99 son finales (ACEPTORES)
 # Caso especial: Estado 110 = ERROR
 
-#       0    1    2    3    4   5     6     7   8    9   10
-#       esp  \n   (    op   u-z  0-9  #t#f   ;   $  raro   )
-MT = [[   0,   0, 111,   1,   5,   3,   4,   6, 100,   7, 112 ], # edo 0 - inicial
-      [   1, 110, 110,   2,   1,   1, 110, 110,   1,   7, 110 ], # edo 1 - inicio string
-      [ 101, 101, 101, 110, 110, 110, 110, 110, 101,   7, 101 ], # edo 2 - termino string
-      [ 102, 102, 102, 110, 110,   3, 110, 110, 102,   7, 102 ], # edo 3 - numero
-      [ 103, 103, 103, 110, 110, 110, 110, 110, 103,   7, 103 ], # edo 4 - booleano
-      [ 104, 104, 104, 110,   5, 110, 110, 110, 104,   7, 104 ], # edo 5 - operador
-      [   6, 105,   6,   6,   6,   6,   6,   6, 105,   6, 105 ], # edo 6 - comentario
-      [ 110, 110, 110, 110, 110, 110, 110, 110, 110,   7, 110 ]] # edo 7 - error
+#       0    1    2    3    4    5    6
+#       esp  fin  var   num  op  err
+MT = [[ 0, 100,   2,   3,   4,    5], # edo - esp
+      [ 0, 1,   1,   2,   3,    5], # edo - fin
+      [ 0, 100,  2, 103, 105,  110], # edo - var
+      [ 0, 103, 110,   2, 110,  110], # edo - num
+      [ 0, 100,   1,   2, 110,  115], # edo - op 
+      [ 0, 110, 110, 110, 110, 110]] # edo - error
 
 # Filtro de caracteres: regresa el numero de columna de la matriz de transiciones
 # de acuerdo al caracter dado
 def filtro(c):
-    if c == ' ': # espacio blanco
+    
+    if c == ' ': # operadores
         return 0
 
-    elif c == '+' or c == '-' or c == '*' or c == '/': # operadores
-        return 3
+    elif c == '$' or c == '(' or c == ')' or c == '.' or c == '\\': # fin de entrada
+        return 1
 
     elif c == 'u' or c == 'v' or c == 'w' or c == 'x' or c == 'y' or c == 'z': # u-z
-       return 4
+       return 2
 
     elif c == '0' or c == '1' or c == '2' or \
        c == '3' or c == '4' or c == '5' or \
        c == '6' or c == '7' or c == '8' or c == '9': # 0-9
-        return 5
+        return 3
 
-    elif c == ';': # comentario
-        return 7
-
-    elif c == '$': # fin de entrada
-        return 8
+    elif c == '+' or c == '-' or c == '*' or c == '/': # operadores
+        return 4
 
     else: # caracter raro
-        return 9
+        return 5
 
 # Funcion principal scanner: implementa el analisis lexico
 def scanner():
@@ -68,45 +64,25 @@ def scanner():
             print "   ( FIN ) " + lexema
             return 'fin';
 
-        elif edo == 101:    # Token 101 - string
+        elif edo == 102:    # Token 102 - variable
             lexema = lexema[:-1] # elimina el delimitador
-            print "   ( STRING ) " + lexema
-            return 'string'
+            print "   ( VARIABLE ) " + lexema
+            return 'variable'
 
-        elif edo == 102:    # Token 102 - numero
+        elif edo == 103:    # Token 103 - numero
             lexema = lexema[:-1] # elimina el delimitador
             print "   ( NUMERO ) " + lexema
             return 'numero'
 
-        elif edo == 103:    # Token 103 - booleano
+        elif edo == 105:    # Token 105 - operador
             lexema = lexema[:-1] # elimina el delimitador
-            print "   ( BOOLEANO ) " + lexema
-            return 'booleano'
-
-        elif edo == 104:    # Token 104 - simbolo
-            lexema = lexema[:-1] # elimina el delimitador
-            print "   ( SIMBOLO ) " + lexema
-            return 'simbolo'
-
-        elif edo == 105:    # Token 105 - comentario
-            lexema = lexema[:-1] # elimina el delimitador
-            print "   ( COMENTARIO ) " + lexema
-            return 'comentario'
+            print "   ( OPERADOR ) " + lexema
+            return 'operador'
 
         elif edo == 110:    # Token 110 - Error Lexico
             lexema = lexema[:-1] # elimina el delimitador
             leer = False
             return 'errorScan'
-
-        elif edo == 111:    # Token 111 - parentesis izquierdo
-            lexema = lexema[:-1] # elimina el delimitador
-            print "   ( PARENTESIS IZQ ) "
-            return 'izq'
-
-        elif edo == 112:    # Token 112 - parentesis derecho
-            lexema = lexema[:-1] # elimina el delimitador
-            print "   ( PARENTESIS DER ) "
-            return 'der'
 
         lexema = ""
         edo = 0
@@ -134,8 +110,7 @@ def prog():
 def exp():
     print "[EXP]"
     global token
-    if token == 'simbolo' or token == 'numero' or \
-      token == 'booleano' or token == 'string':
+    if token == 'variable' or token == 'numero':
         match(token)
         atomo()
     else:
