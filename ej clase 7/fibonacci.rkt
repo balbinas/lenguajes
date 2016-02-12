@@ -10,7 +10,10 @@
 
 ; subebaja
 (define (subebaja n)
-  n
+  (for ([i (in-range 1 (+ n 1))])
+    (display i)(write-char #\space))
+  (for ([i (in-range (- n 1) 0 -1)])
+    (display i)(write-char #\space))
 )
 
 ; fibonacci
