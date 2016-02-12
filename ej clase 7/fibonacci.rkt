@@ -2,8 +2,11 @@
 
 ; geometrica
 (define (geometrica n)
-  n
+  (if (= n 0) 1
+      (+ (/ 1 (expt 2 n)) (geometrica (- n 1)))
+  )
 )
+         
 
 ; subebaja
 (define (subebaja n)

@@ -10,6 +10,7 @@
 # son reconocidos por el scanner
 #
 # Autor: Dr. Santiago Conant, Agosto 2014 (modificado Agosto 2015)
+# Co-Autores: Manuel Sa–udo, Fabi‡n Montemayor, Balbina Santana
 
 import sys
 import scanner
