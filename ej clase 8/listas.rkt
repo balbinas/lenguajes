@@ -27,6 +27,6 @@
 )
 
 ; elimina
-(define (elimina l)
-  
+(define (elimina l lst)
+  (remove* (list l) lst)
 )
