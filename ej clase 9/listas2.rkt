@@ -1,4 +1,5 @@
 #lang racket
+; Manuel Sañudo, Fabian Montemayor, Balbina Santana
 
 ; tacha
 (define (tacha l)
