@@ -1,4 +1,5 @@
 #lang racket
+(require math/number-theory)
 
 (define % modulo)
 
@@ -28,3 +29,25 @@
   )
 )
 
+; seno
+; Función recursiva que regresa el seno de su primer argumento x mediante los
+; n primeros términos de la serie de Taylor
+(define (seno x n)
+  (if (eq? n 0)
+      1
+      (+ (taylor x n) (seno x (- n 1)))
+  )
+)
+(define (taylor x n)
+  (* (expt -1 n) (/ (expt x (+ n n 1)) (factorial (+ n n 1)) ))
+)
+
+; multiplos
+; Función recursiva multiplos que calcula la suma de los primeros N múltiplos de
+; un número entero positivo.
+(define (multiplos x n)
+  (if (eq? n 1)
+      x
+      (+ (* x n) (multiplos x (- n 1)))
+  )
+)
