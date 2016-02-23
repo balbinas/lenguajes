@@ -51,3 +51,27 @@
       (+ (* x n) (multiplos x (- n 1)))
   )
 )
+
+; bitxor
+; Función recursiva que calcula el xor lógico entre bits dados como elementos de
+; 2 listas dadas dos listas son del mismo tamaño.
+(define (bitxor)
+  
+)
+
+; octal
+; Función recursiva que regresa una lista de numeros y letras que representa la
+; codificación octal del argumento entero que representa un número en binario.
+(define (octal l)
+  
+)
+
+; list->num
+; Función recursiva list->num que convierte su argumento dado como una lista de
+; dígitos en un número entero no negativo.
+(define (list->num l)
+  (if (eq? (cdr l) '())
+      (car l)
+      (+ (* (expt 10 (- (length l) 1)) (car l)) (list->num (cdr l)))
+ )
+)
