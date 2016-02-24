@@ -52,6 +52,21 @@
   )
 )
 
+; listas
+; inciso a
+; representacion visual
+'(((a . d) . c) . b)
+; representacion cons
+(cons (cons (cons 'a 'd) 'c) 'b)
+
+; inciso b
+; representacion cons
+(cons 1 (cons 2 (cons (cons (cons 3 4) 5) '())))
+
+; inciso c
+; representacion visual
+'(((a . b) c) d)
+
 ; bitxor
 ; Función recursiva que calcula el xor lógico entre bits dados como elementos de
 ; 2 listas dadas dos listas son del mismo tamaño.
