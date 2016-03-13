@@ -85,6 +85,12 @@
   )
 )
 
+; 2f. diagonal
+; regresa la diagonal principal de la matriz.
+(define (diagonal m)
+  (cond
+    ((null? m) '())
+    (else (cons (caar m) (diagonal (colr (cdr m)))))))
 
 ; 2g . multiply matrix
 ; Multiplica matrices que si se pueden multiplicar.
