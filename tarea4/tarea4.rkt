@@ -84,3 +84,45 @@
     )
   )
 )
+
+
+; 2g . multiply matrix
+; Multiplica matrices que si se pueden multiplicar.
+(define (multmat m1 m2)
+  (cond
+    ((null? m1) '())
+    ((null? (car m1)) '())
+    (else (cons (removelast (vecmult (car m1) m2)) (multmat (cdr m1) m2)))))
+
+; Multiplica 1 renglon por una matriz.
+(define (vecmult v m)
+  (cond
+    ((null? m) '())
+    (else (cons (dotprod v (col m)) (vecmult v (colr m))))))
+
+(define (dotprod v1 v2)
+  (cond
+    ((null? v1) 0)
+    ((null? v2) 0)
+    (else (+ (* (car v1) (car v2)) (dotprod (cdr v1) (cdr v2))))))
+
+; regresa la primera columna de una matriz.
+(define (col m)
+  (cond
+    ((null? m) '())
+    ((null? (car m)) '())
+    (else (cons (car (car m)) (col (rest m))))))
+
+; regresa el resto de la matriz al quitarle la primera columna.
+(define (colr m)
+  (cond
+    ((null? m) '())
+    ((null? (car m)) '())
+    (else (cons (rest (car m)) (colr (rest m))))))
+
+; elimina el último elemento de una lista.
+(define (removelast l)
+    (if (null? (cdr l))
+        '()
+        (cons (car l) (removelast (cdr l)))))
+
