@@ -85,6 +85,12 @@
   )
 )
 
+; 2e. intercambia
+; intercambia los renglones de una matriz dependiendo de los argumentos de la funcion
+(define (intercambia idx1 idx2 l)
+  (let* ([x (list-ref l (- idx1 1))]) 
+  (list-set (list-set l (- idx2 1) x) (- idx1 1) (list-ref l (- idx2 1)))))
+
 ; 2f. diagonal
 ; regresa la diagonal principal de la matriz.
 (define (diagonal m)
