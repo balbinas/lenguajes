@@ -70,15 +70,22 @@
 ; bitxor
 ; Función recursiva que calcula el xor lógico entre bits dados como elementos de
 ; 2 listas dadas dos listas son del mismo tamaño.
-(define (bitxor)
-  
-)
+(define (bitxor l1 l2)
+  (compara-aux l1 l2 '()))
+(define (compara-aux l1 l2 l3)
+  (if (null? l1) l3
+  (cond ((eq? (car l1)(car l2))
+         (compara-aux(cdr l1)(cdr l2)(append l3 (list 0))))
+        (else (compara-aux (cdr l1)(cdr l2)(append l3 (list 1)))))))
 
 ; octal
 ; Función recursiva que regresa una lista de numeros y letras que representa la
 ; codificación octal del argumento entero que representa un número en binario.
 (define (octal l)
-  
+ ;super dudoso!!!!
+  (if (zero? l)
+      l
+      (+ (modulo l 10) (* 2 (octal (quotient l 10)))))
 )
 
 ; list->num
