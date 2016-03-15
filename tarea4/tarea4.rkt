@@ -138,3 +138,48 @@
         '()
         (cons (car l) (removelast (cdr l)))))
 
+
+;3 Problema sobre funcion de orden superior
+;
+(define g
+    '((A ((B 2) (D 10)))
+      (B ((C 9) (E 5)))
+      (C ((A 12) (D 6)))
+      (D ((E 7)))
+      (E ((C 3)))
+))
+
+;3a listar "nodos-destino" que tienen a N como nodo origen directo
+(define (nodos-destino grafo origen)
+    (map car
+    (list-ref  
+        (car (filter (lambda (renglon) (equal? (car renglon) origen)) grafo))
+    1))
+)
+
+;3b listar "nodos-origen" que tienen a N como de destino
+(define (nodos-origen grafo destino)
+    (map car (filter (lambda (renglon) 
+        (member destino (map car (car (cdr renglon))))
+    ) grafo))
+)
+
+;3c listar nodos restantes de "elimina-arco"
+(define (elimina-arco grafo nodo arco)
+    (map 
+        (lambda (nombre-nodo lista-nodos)
+            (if (equal? nodo nombre-nodo)
+                (if (member arco (map car (car lista-nodos)))
+                    (list nombre-nodo 
+                        (filter 
+                            (lambda (ruta) (not (equal? arco (car ruta))))
+                            (car lista-nodos)))
+                    (list nombre-nodo (car lista-nodos))
+                )
+                (list nombre-nodo (car lista-nodos))
+            )
+        )
+        (map car grafo) 
+        (map cdr grafo)
+    )
+)
