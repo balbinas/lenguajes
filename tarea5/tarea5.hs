@@ -168,6 +168,7 @@ agrega_abb (Node l y r) x
 -- 10. Función no-recursiva f_cuentasub que utilizando la FOS map, cuenta la cantidad de números impares de las sublistas de una lista.
 -- f_cuentasub [[1,3,5],[1,2,3]] => [3,2]
 -- f_cuentasub [[],[1],[1,2,3],[5,4,3,2,1]] => [0,1,2,3]
-
+f_cuentasub :: [[Int]] -> [Int]
+f_cuentasub lista = map (\i-> length (filter odd i)) lista
 
 
