@@ -1,3 +1,5 @@
+-- 812215_01280156_01192241
+
 -- ghci haskell.hs
 -- :quit
 module Haskell where
@@ -90,7 +92,11 @@ salto2 n i s1 s2 r = salto1 (n-1) (i+s2) s1 s2 (r ++ [i])
 -- 5. Función recursiva desplaza que recibe un entero y una lista de sublistas, y regresa una lista con la misma estructura que la original (misma cantidad de sublistas y sublistas del mismo tamaño), pero donde sus elementos estén desplazados N posiciones hacia la derecha. El desplazamiento hace que elementos de una sublista pasen a sublistas subsecuentes y debe trabajar de forma circular, de forma que los elementos de la última sublista pasarían a la primera (si no está vacía).
 -- desplaza 1 [[1,2,3],[4,5,6]] => [[6,1,2],[3,4,5]]
 -- desplaza 3 [[],[1],[2,3],[4,5,6]] => [[],[4],[5,6],[1,2,3]]
-
+desplaza :: Eq a =>[a] -> [a] -> Bool
+desplaza [] _ = True
+desplaza (x:xs) (y)
+  | (elem x y) = False
+  | otherwise = desplaza xs y 
 
 
 
@@ -154,19 +160,18 @@ agrega_abb (Node l y r) x
 -- Funciones de Orden Superior y otras facilidades
 -- 8. Función recursiva g_disjuntas que utilizando “guardias” implemente un predicado que verifica si dos listas planas pasadas como sus argumentos tienen elementos en común.
 -- g_disjuntas [1,2,3] [4,5,1] => False > g_disjuntas [‘a’,‘b’,‘c’] [‘d’,‘e’,‘f’] => True
-g_disjuntas :: [Int] -> [Int] -> Bool
-g_disjuntas x y
-  | (intersect x y == []) = (True)
-  | otherwise = False
-
+g_disjuntas :: Eq a =>[a] -> [a] -> Bool
+g_disjuntas [] _ = True
+g_disjuntas (x:xs) (y)
+  | (elem x y) = False
+  | otherwise = g_disjuntas xs y 
 
 
 -- 9. Función no-recursiva c_pares2 que utilizando “comprensión de listas” obtenga una lista ordenada con el cuadrado de los números pares del 2 al n.
 -- c_pares2 1 => []
 -- c_pares2 10 => [4,16,36,64,100]
 c_pares2 :: Int -> [Int]
-c_pares2 n = [x * x | x <- [2, 4..(n)] ] 
-
+c_pares2 n = [ x | x <- (map (\y-> y * y) [1..n]), even x]
 
 
 -- 10. Función no-recursiva f_cuentasub que utilizando la FOS map, cuenta la cantidad de números impares de las sublistas de una lista.
