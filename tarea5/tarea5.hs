@@ -161,7 +161,8 @@ agrega_abb (Node l y r) x
 -- 9. Función no-recursiva c_pares2 que utilizando “comprensión de listas” obtenga una lista ordenada con el cuadrado de los números pares del 2 al n.
 -- c_pares2 1 => []
 -- c_pares2 10 => [4,16,36,64,100]
-
+c_pares2 :: Int -> [Int]
+c_pares2 n = [x * x | x <- [2, 4..(n)] ] 
 
 
 
