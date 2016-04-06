@@ -1,7 +1,7 @@
 -- ghci haskell.hs
 -- :quit
 module Haskell where
-
+import Data.List
 
 -- Programación básica y recursiva SIN LISTAS
 -- 1. Función moda, obtiene el valor con mayor frecuencia de un grupo de 5 argumentos. En caso de empate regresa el primer valor.
@@ -154,7 +154,10 @@ agrega_abb (Node l y r) x
 -- Funciones de Orden Superior y otras facilidades
 -- 8. Función recursiva g_disjuntas que utilizando “guardias” implemente un predicado que verifica si dos listas planas pasadas como sus argumentos tienen elementos en común.
 -- g_disjuntas [1,2,3] [4,5,1] => False > g_disjuntas [‘a’,‘b’,‘c’] [‘d’,‘e’,‘f’] => True
-
+g_disjuntas :: [Int] -> [Int] -> Bool
+g_disjuntas x y
+  | (intersect x y == []) = (True)
+  | otherwise = False
 
 
 
