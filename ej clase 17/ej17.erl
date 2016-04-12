@@ -52,10 +52,12 @@ math(Last, Sum) ->
 			io:format("~p = ", [Y]),
 			io:format("~p~n", [X*Y]),
 			math(X*Y, Sum + X*Y);
-		{last} ->
+		{last, P} ->
+			P ! {result, Last},
 			io:format("Last: ~p~n", [Last]),
 			math(Last, Sum);
-		{sum} ->
+		{sum, P} ->
+			P ! {result, Sum},
 			io:format("Sum: ~p~n", [Sum]),
 			math(Last, Sum);
 		exit -> bye;
