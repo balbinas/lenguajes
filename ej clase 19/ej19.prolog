@@ -57,6 +57,50 @@ parent(marcela, daniel).
 
 
 
+parent(elvia, selina).
+parent(roque, selina).
+parent(elvia, mayra).
+parent(roque, mayra).
+parent(elvia, carmen).
+parent(roque, carmen).
+
+parent(elda, alejandro).
+parent(pedro, alejandro).
+parent(elda, lourdes).
+parent(pedro, lourdes).
+parent(elda, alfonso).
+parent(pedro, alfonso).
+
+parent(selina, fabian).
+parent(alejandro, fabian).
+parent(selina, daniela).
+parent(alejandro, daniela).
+
+parent(mayra, cinthya).
+parent(pedrog, cinthya).
+parent(mayra, marco).
+parent(pedrog, marco).
+
+parent(carmen, dani).
+parent(remigio, dani).
+parent(carmen, gabi).
+parent(remigio, gabi).
+parent(carmen, javier).
+parent(remigio, javier).
+
+parent(lourdes, arturo).
+parent(hugo, arturo).
+parent(lourdes, eduardo).
+parent(hugo, eduardo).
+
+parent(alfonso, doris).
+parent(yazmin, doris).
+parent(alfonso, jany).
+parent(yazmin, jany).
+
+
+
+
 child(X, Y) :- parent(Y, X).
 
 sibling(X, Y) :- parent(A, X), parent(A, Y).
