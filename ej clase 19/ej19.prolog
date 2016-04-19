@@ -101,6 +101,40 @@ parent(yazmin, jany).
 
 
 
+
+parent(fernando, mayte).
+parent(teresa, mayte).
+parent(fernando, erick).
+parent(teresa, erick).
+parent(fernando, fer).
+parent(teresa, fer).
+
+parent(conchita, alvaro).
+parent(jesus, alvaro).
+parent(conchita, eugenia).
+parent(jesus, eugenia).
+
+parent(eugenia, corina).
+parent(carlos, corina).
+
+parent(alvaro, balbina).
+parent(mayte, balbina).
+parent(alvaro, milla).
+parent(mayte, milla).
+parent(alvaro, alvarito).
+parent(mayte, alvarito).
+
+parent(fer, paulina).
+parent(magdala, paulina).
+parent(fer, andrea).
+parent(magdala, andrea).
+parent(fer, fernandito).
+parent(magdala, fernandito).
+
+
+
+
+
 child(X, Y) :- parent(Y, X).
 
 sibling(X, Y) :- parent(A, X), parent(A, Y).
