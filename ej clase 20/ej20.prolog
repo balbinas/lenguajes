@@ -1,5 +1,9 @@
-%% 1. De forma similar a lo visto en clase, ilustra el árbol de búsqueda que se formará con el siguiente programa en Prolog al ejecutarlo para obtener todas las respuestas para el query: ?- p(Y).
+%% Matricula 1 A00812215
+%%Matricula 2 A01192241
+%%Matricula 3 A01280156
 
+%% 1. De forma similar a lo visto en clase, ilustra el árbol de búsqueda que se formará con el siguiente programa en Prolog al ejecutarlo para obtener todas las respuestas para el query: ?- p(Y).
+%%WORD_DOC
 
 
 
@@ -16,38 +20,18 @@ secuenciaAux(N, X) :-
 secuenciaAux(_, _).
 
 
-%% not working
 %% 3. Programar el predicado multiplos en Prolog que cuente la cantidad de múltiplos de N menores o iguales a M (incluyendo a N).
-/*?- multiplos(2,10,5).​=> true
-  ?- multiplos(3,30,X).​=> X = 10*/
-multiplos(N, M, X) :- multiplosAux(N, M, X, 1).
-
-multiplosAux(N, M, X, R) :-
-	M >= N,
-	Mm is M-N,
-	Rr is R+1,
-	multiplosAux(N, Mm, X, Rr),
-	X is Rr.
+multiplos(_,0,0).
+multiplos(N,D,M):-
+   X is D mod N,
+   Y is D - 1,
+   multiplos(N,Y,W),
+   (X=:=0 -> M is W+1; M is W).
 
 
-
-%% not working
 %% 4. Programar el predicado digitos en Prolog que obtenga la cantidad de dígitos que tenga un número entero no negativo.
-/*?- digitos(7,1).​​=> true
-?- digitos(1234,D).​=> D = 4*/
-digitos(X, D) :-
-	X / 10 > 0,
-	Xx is X/10,
-	Dd is D+1,
-	digitos(Xx, Dd),
-	D is Dd.
-digitos(_, D) :- D.
-
-m(X, Y) :- X is Y mod 10.
-/*var x = 1
-var y = 1000.0
-while (floor(y/10) > 0) {
-	y = (y / 10)
-	x += 1
-}
-print(x)*/
+digitos(0,0).
+digitos(N,D):-
+   X is N // 10,
+   digitos(X,W),
+  D is W+1.
