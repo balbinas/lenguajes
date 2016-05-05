@@ -49,7 +49,8 @@ is Ind+1,diagonal(M,N,L2,L1,Ind2).
 %% Representaremos un arbol binario de busqueda vacio con el atomo nil y un arbol no vacio con el termino a(R,I,D), donde R denota al nodo raiz e I y D denotan los subarboles izquierdo y derecho, respectivamente.
 %% De esa forma T1 = nil representa a un arbol binario vacio, T2 = a(r,nil,nil) representa un arbol que consiste solo del nodo raiz que es un nodo hoja, y T3 = a(n1,a(n2,nil,nil),a(n3,nil,nil)) es un arbol que consiste de 3 nodos: n1 que es su raiz, n2 que es la raiz de su subarbol izquierdo y n3 que es la raiz de su subarbol derecho (n2 y n3 son nodos hoja).
 %% Un arbol binario de busqueda es un arbol donde el valor de su raiz es mayor o igual que todos los valores de los nodos de su subarbol izquierdo y menor que todos los valores de su subarbol derecho. Los subarboles tambien son arboles binarios de busqueda. 
-
+esabb(nil).
+esabb(t(_,L,R)) :- esabb(L), esabb(R).
 
 
 %%9. Obtener una lista con el valor de los nodos de un arbol binario de busqueda que caigan en un rango correctamente especificado (el primer numero define el limite inferior y el segundo el superior). 
