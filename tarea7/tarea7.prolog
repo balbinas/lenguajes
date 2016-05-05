@@ -59,3 +59,16 @@ is Ind+1,diagonal(M,N,L2,L1,Ind2).
 
 
 %%10. Determinar si un arbol binario esta completamente balanceado. Definimos un arbol binario completamente balanceado como un arbol donde todas sus hojas estan en su ultimo nivel y donde su subarbol izquierdo tiene uno nodo mas o un nodo menos que su subarbol derecho. 
+altura(nodo(L,R), tamano) :-
+    altura(L, izq),
+    altura(R, der),
+    tamano is izq + der + 1 .
+altura(l(_),1).
+
+balanceado(l(_)).
+balanceado(nodo(R1,R2)):-
+    altura(R1,A1),
+    altura(R2,A2),
+    abs(A1-A2) =< 1,
+    balanceado(R1),
+    balanceado(R2).
