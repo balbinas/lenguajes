@@ -34,11 +34,17 @@ decodifica([N|E], [N|X]) :- decodifica(E, X).
 
 
 %%6. Intercambiar 2 columnas de una matriz representada como lista de renglones. Asumir que las columnas especificadas existen y son distintas. 
-
+intercambia([[]|_], []).
+intercambia(M, [X|T]) :- row(M, X, M1), 
+                       intercambia(M1, T).
+renglon([], [], []).
+renglon([[X|Xs]|Ys], [X|R], [Xs|Z]) :- renglon(Ys, R, Z).
 
 
 %%7. Obtener una lista con los elementos de la diagonal de una matriz cuadrada. 
-
+diagonal(M,N,L1,L1,N):-write(L1).
+diagonal(M,N,L2,L,Ind):-find_n(Ind,M,E1),find_n(Ind,E1,E2),merge2(E2,L,L1),Ind2
+is Ind+1,diagonal(M,N,L2,L1,Ind2).
 
 
 %%8. Determinar si un termino dado representa un arbol binario de busqueda.
