@@ -2,17 +2,18 @@
 %%Matricula 2 A01192241
 %%Matricula 3 A01280156
 
-%%1. Determinar si dos enteros mayores que 1 son primos relativos. Dos enteros son primos relativos si su único divisor común es el 1. Un divisor de un entero es un entero positivo que lo divide exactamente.
+%%1. Determinar si dos enteros mayores que 1 son primos relativos. Dos enteros son primos relativos si su unico divisor comun es el 1. Un divisor de un entero es un entero positivo que lo divide exactamente.
 primos_relativos(X, Y) :-
     gcd(X, Y) =:= 1.
 
 
-%%2. Encontrar un inverso de un entero n módulo m. Un inverso es un entero en el rango 1 <= x < m, tal que
-el residuo de dividir x veces n por m sea igual a 1. Puede que el inverso no exista o que haya varios.
+%%2. Encontrar un inverso de un entero n modulo m. Un inverso es un entero en el rango 1 <= x < m, tal que el residuo de dividir x veces n por m sea igual a 1. Puede que el inverso no exista o que haya varios.
+inverso(N, M, X) :-
+	X >= 1, X < M, ((X*N) mod M) =:= 1.
 
 
 
-%%3. Modifica una lista de enteros repitiendo cada entero su número de veces. 
+%%3. Modifica una lista de enteros repitiendo cada entero su numero de veces. 
 repite(L, N, X) :-
     length(X, N),
     maplist(=(L), X)
@@ -22,13 +23,11 @@ repite(L, N, X) :-
 
 
 
-%%5. Decodificar la longitud de las corridas de una lista. Para esto, los términos codificados [N,E] se decodifican
-como una secuencia de N copias del elemento E. 
+%%5. Decodificar la longitud de las corridas de una lista. Para esto, los terminos codificados [N,E] se decodifican como una secuencia de N copias del elemento E. 
 
 
 
-%%6. Intercambiar 2 columnas de una matriz representada como lista de renglones. Asumir que las columnas
-especificadas existen y son distintas. 
+%%6. Intercambiar 2 columnas de una matriz representada como lista de renglones. Asumir que las columnas especificadas existen y son distintas. 
 
 
 
@@ -36,24 +35,15 @@ especificadas existen y son distintas.
 
 
 
-%%8. Determinar si un término dado representa un árbol binario de búsqueda.
-Representaremos un árbol binario de búsqueda vacío con el átomo nil y un árbol no vacío con el término
-a(R,I,D), donde R denota al nodo raíz e I y D denotan los subárboles izquierdo y derecho, respectivamente.
-De esa forma T1 = nil representa a un árbol binario vacío, T2 = a(r,nil,nil) representa un árbol que consiste
-solo del nodo raíz que es un nodo hoja, y T3 = a(n1,a(n2,nil,nil),a(n3,nil,nil)) es un árbol que consiste de
-3 nodos: n1 que es su raíz, n2 que es la raíz de su subárbol izquierdo y n3 que es la raíz de su subárbol
-derecho (n2 y n3 son nodos hoja).
-Un árbol binario de búsqueda es un árbol donde el valor de su raíz es mayor o igual que todos los valores
-de los nodos de su subárbol izquierdo y menor que todos los valores de su subárbol derecho. Los
-subárboles también son árboles binarios de búsqueda. 
+%%8. Determinar si un termino dado representa un arbol binario de busqueda.
+%% Representaremos un arbol binario de busqueda vacio con el atomo nil y un arbol no vacio con el termino a(R,I,D), donde R denota al nodo raiz e I y D denotan los subarboles izquierdo y derecho, respectivamente.
+%% De esa forma T1 = nil representa a un arbol binario vacio, T2 = a(r,nil,nil) representa un arbol que consiste solo del nodo raiz que es un nodo hoja, y T3 = a(n1,a(n2,nil,nil),a(n3,nil,nil)) es un arbol que consiste de 3 nodos: n1 que es su raiz, n2 que es la raiz de su subarbol izquierdo y n3 que es la raiz de su subarbol derecho (n2 y n3 son nodos hoja).
+%% Un arbol binario de busqueda es un arbol donde el valor de su raiz es mayor o igual que todos los valores de los nodos de su subarbol izquierdo y menor que todos los valores de su subarbol derecho. Los subarboles tambien son arboles binarios de busqueda. 
 
 
 
-%%9. Obtener una lista con el valor de los nodos de un árbol binario de búsqueda que caigan en un rango
-correctamente especificado (el primer número define el límite inferior y el segundo el superior). 
+%%9. Obtener una lista con el valor de los nodos de un arbol binario de busqueda que caigan en un rango correctamente especificado (el primer numero define el limite inferior y el segundo el superior). 
 
 
 
-%%10. Determinar si un árbol binario está completamente balanceado. Definimos un árbol binario
-completamente balanceado como un árbol donde todas sus hojas están en su último nivel y donde su
-subárbol izquierdo tiene uno nodo más o un nodo menos que su subárbol derecho. 
+%%10. Determinar si un arbol binario esta completamente balanceado. Definimos un arbol binario completamente balanceado como un arbol donde todas sus hojas estan en su ultimo nivel y donde su subarbol izquierdo tiene uno nodo mas o un nodo menos que su subarbol derecho. 
