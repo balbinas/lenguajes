@@ -11,12 +11,10 @@ primos_relativos(X, Y) :-
 inverso(N, M, X) :-
 	X >= 1, X < M, ((X*N) mod M) =:= 1.
 
-
-
 %%3. Modifica una lista de enteros repitiendo cada entero su numero de veces. 
 repite(L, N, X) :-
     length(X, N),
-    maplist(=(L), X)
+    maplist(=(L), X).
 
 
 %%4. Cuenta valores repetidos contiguos en una lista plana.
