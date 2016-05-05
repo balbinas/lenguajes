@@ -20,12 +20,17 @@ repite(L, N, X) :-
 
 
 %%4. Cuenta valores repetidos contiguos en una lista plana.
-decodifica([], []).
-decodifica([X|Y], [X|Z]) :- subtract(Y, [X], W), decodifica(W, Z).
+adyacentes([], []).
+adyacentes([X|Y], [X|Z]) :- subtract(Y, [X], W), adyacentes(W, Z).
 
 
 %%5. Decodificar la longitud de las corridas de una lista. Para esto, los terminos codificados [N,E] se decodifican como una secuencia de N copias del elemento E. 
-
+decodifica([], []).
+decodifica([[1,N]|E], [N|X]) :- decodifica(E,X).
+decodifica([[N,N]|E], [N|X]) :-
+        M is N-1,
+        decodifica([[M,N]|E], X), !.
+decodifica([N|E], [N|X]) :- decodifica(E, X).
 
 
 %%6. Intercambiar 2 columnas de una matriz representada como lista de renglones. Asumir que las columnas especificadas existen y son distintas. 
