@@ -13,7 +13,9 @@ el residuo de dividir x veces n por m sea igual a 1. Puede que el inverso no exi
 
 
 %%3. Modifica una lista de enteros repitiendo cada entero su número de veces. 
-
+repite(L, N, X) :-
+    length(X, N),
+    maplist(=(L), X)
 
 
 %%4. Cuenta valores repetidos contiguos en una lista plana.
