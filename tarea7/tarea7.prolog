@@ -20,7 +20,8 @@ repite(L, N, X) :-
 
 
 %%4. Cuenta valores repetidos contiguos en una lista plana.
-
+decodifica([], []).
+decodifica([X|Y], [X|Z]) :- subtract(Y, [X], W), decodifica(W, Z).
 
 
 %%5. Decodificar la longitud de las corridas de una lista. Para esto, los terminos codificados [N,E] se decodifican como una secuencia de N copias del elemento E. 
